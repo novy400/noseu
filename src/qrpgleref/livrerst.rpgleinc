@@ -1,0 +1,30 @@
+**free
+/if defined(LIVRERSTRST_H_DEFINED)       
+/eof                               
+/endif                             
+/define LIVRERSTRST_H_DEFINED  
+
+//------------------------------------------------------------------//
+// printf (c)                                                       //
+//------------------------------------------------------------------//
+dcl-ds LIVRERST_Detail template qualified;
+         code int(10);
+         titre varchar(132);
+         description varchar(132);
+         nombrePages int(10);
+         urlPhoto varchar(132);
+end-ds;
+dcl-ds LIVRERST_Item template qualified;
+         code like(LIVRERST_Detail.code);
+         titre like(LIVRERST_Detail.titre);
+end-ds;
+
+dcl-pr LIVRERST_GETALL ind extproc(*dclcase);
+         livres likeds(LIVRERST_Item) dim(1000) options(*varsize);
+end-pr;
+
+dcl-pr LIVRERST_GETBYCODE ind extproc(*dclcase);
+         id like(LIVRERST_Detail.id) const;
+         livre  likeds(LIVRERST_Detail);
+end-pr;
+
