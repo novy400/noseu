@@ -1,4 +1,7 @@
-LIBLIST= $(BIN_LIB)
+DB_LIB=QIWS
+DBGVIEW=*ALL
+DBGVIEWSQL=*SOURCE
+LIBLIST= $(DB_LIB) $(BIN_LIB)
 CCSID=297
 
 # The shell we use
@@ -15,6 +18,11 @@ init:
 	-system -q "CRTLIB $*"
 	@touch $@
 
+%.inc: src/qrpgleref/%.rpgle
+	system "CHGATR OBJ('$<') ATR(*CCSID) VALUE(1208)" 
+	cp  '$<'  $(INC_LIB)
+	@touch $@
+
 %.pgm:
 	$(eval modules := $(patsubst %,$(BIN_LIB)/%,$(basename $(filter %.rpgle %.sqlrpgle,$(notdir $^)))))
 	system "CHGATR OBJ('$<') ATR(*CCSID) VALUE(1208)" 
@@ -22,14 +30,17 @@ init:
 	system "CRTPGM PGM($(BIN_LIB)/$*) MODULE($(modules))"
 	@touch $@
 
-
-
 %.rpgle: src/qrpglesrc/%.rpgle
 	system "CHGATR OBJ('$<') ATR(*CCSID) VALUE(1208)" 
 	liblist -af $(LIBLIST);\
 	system "CRTRPGMOD MODULE($(BIN_LIB)/$*) SRCSTMF('$<') DBGVIEW($(DBGVIEW)) TGTCCSID($(CCSID))"
 	@touch $@
 
+%.sqlrpgle: src/qrpglesrc/%.sqlrpgle
+	system "CHGATR OBJ('$<') ATR(*CCSID) VALUE(1208)" 
+	liblist -af $(LIBLIST);\
+	system "CRTSQLRPGI OBJ($(BIN_LIB)/$*) SRCSTMF('$<') COMMIT(*NONE) OBJTYPE(*MODULE) RPGPPOPT(*LVL2) COMPILEOPT('TGTCCSID($(CCSID))') DBGVIEW($(DBGVIEWSQL))"
+	@touch $@
 
 %.entry:
     # Basically do nothing..
