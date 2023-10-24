@@ -76,7 +76,7 @@
       "GLOBAL"
     ],
     "name": "Build all",
-    "command": "/QOpenSys/pkgs/bin/gmake BIN_LIB=&CURLIB ERR=*EVENTF",
+    "command": "/QOpenSys/pkgs/bin/ ERR=*EVENTF",
     "environment": "pase",
     "deployFirst": true
   },

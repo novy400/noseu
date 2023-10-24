@@ -1,9 +1,10 @@
 PROJET= NOSEU
 BIN_LIB=$(PROJET)BIN
-DB_LIB=QIWS
+TST_LIB=$(PROJET)TST
+RPGUNIT_LIB=RPGUNIT
 DBGVIEW=*ALL
 DBGVIEWSQL=*SOURCE
-LIBLIST= $(DB_LIB) $(BIN_LIB)
+LIBLIST= $(BIN_LIB)
 INC_LIB= '/home/YV/include/'
 CCSID=297
 
@@ -17,6 +18,8 @@ crtlib: $(BIN_LIB).lib
 # TODO: dans init ajouter le chargement de la table 
 init: 
 livrerst.srvpgm : livrerst.inc livrerst.sqlrpgle
+tst: $(TST_LIB).lib livrerst.srvpgm livrerst.tst
+
 %.lib:
 	-system -q "CRTLIB $*"
 	@touch $@
@@ -53,6 +56,16 @@ livrerst.srvpgm : livrerst.inc livrerst.sqlrpgle
 
 	@touch $@
 	system "DLTOBJ OBJ($(BIN_LIB)/*ALL) OBJTYPE(*MODULE)"
+
+%.tst: src/qtstsrc/%.tst.sqlrpgle
+	system "CHGATR OBJ('$<') ATR(*CCSID) VALUE(1208)"
+	liblist -af $(LIBLIST) $(TST_LIB) $(RPGUNIT_LIB);\
+	system "CRTSQLRPGI OBJ($(TST_LIB)/$*) SRCSTMF('$<') COMMIT(*NONE) OBJTYPE(*MODULE) RPGPPOPT(*LVL2) COMPILEOPT('TGTCCSID(*JOB)') DBGVIEW($(DBGVIEWSQL))"
+	liblist -af $(LIBLIST) $(TST_LIB) $(RPGUNIT_LIB);\
+	system "CRTSRVPGM SRVPGM($(TST_LIB)/$*) BNDSRVPGM(RUTESTCASE $(BIN_LIB)/$*) EXPORT(*ALL) OPTION(*DUPPROC) MODULE($(TST_LIB)/$*)"
+	liblist -af $(LIBLIST) $(TST_LIB) $(RPGUNIT_LIB);\
+	system "RUCALLTST TSTPGM($(TST_LIB)/$*)"
+	@touch $@
 
 %.entry:
     # Basically do nothing..
