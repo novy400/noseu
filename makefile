@@ -1,6 +1,7 @@
 PROJET= NOSEU
 BIN_LIB=$(PROJET)BIN
 TST_LIB=$(PROJET)TST
+BND_LIB=$(BIN_LIB)
 RPGUNIT_LIB=RPGUNIT
 DBGVIEW=*ALL
 DBGVIEWSQL=*SOURCE
@@ -11,13 +12,15 @@ CCSID=297
 # The shell we use
 SHELL=/QOpenSys/usr/bin/qsh
 
-all: crtlib init livrerst.srvpgm
+all: crtlib init livrerst.srvpgm livrerst.bnddir livrelst.pgm
 
 # rules
 crtlib: $(BIN_LIB).lib
 # TODO: dans init ajouter le chargement de la table 
 init: 
-livrerst.srvpgm : livrerst.inc livrerst.sqlrpgle
+livrerst.srvpgm: livrerst.inc livrerst.sqlrpgle
+livrelst.pgm: livrerst.srvpgm livrelst.rpgle
+noseu.bnddir: livrerst.entry
 tst: $(TST_LIB).lib livrerst.srvpgm livrerst.tst
 
 %.lib:
@@ -56,6 +59,13 @@ tst: $(TST_LIB).lib livrerst.srvpgm livrerst.tst
 
 	@touch $@
 	system "DLTOBJ OBJ($(BIN_LIB)/*ALL) OBJTYPE(*MODULE)"
+
+%.bnddir: 
+	-system -q "CRTBNDDIR BNDDIR($(BND_LIB)/$*)"
+	liblist -af $(LIBLIST);\
+
+	-system -q "ADDBNDDIRE BNDDIR($(BND_LIB)/$*) OBJ($(patsubst %.entry,(*LIBL/% *SRVPGM *IMMED),$^))"
+	@touch $@
 
 %.tst: src/qtstsrc/%.tst.sqlrpgle
 	system "CHGATR OBJ('$<') ATR(*CCSID) VALUE(1208)"

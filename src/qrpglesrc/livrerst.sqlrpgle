@@ -64,6 +64,8 @@ snd-msg ('HEADER: ' + %trim(lHeader) + '.');
     for 1000 rows
     into :pLivres;
 
+  exec sql
+    close CUR_listeBook;
 // finalisation  
 on-error;
   // 💥 hooreur !
