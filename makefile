@@ -2,6 +2,7 @@ DB_LIB=QIWS
 DBGVIEW=*ALL
 DBGVIEWSQL=*SOURCE
 LIBLIST= $(DB_LIB) $(BIN_LIB)
+INC_LIB= '/home/YV/include/'
 CCSID=297
 
 # The shell we use
@@ -18,7 +19,7 @@ init:
 	-system -q "CRTLIB $*"
 	@touch $@
 
-%.inc: src/qrpgleref/%.rpgle
+%.inc: src/qrpgleref/%.rpgleinc
 	system "CHGATR OBJ('$<') ATR(*CCSID) VALUE(1208)" 
 	cp  '$<'  $(INC_LIB)
 	@touch $@

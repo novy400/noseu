@@ -7,6 +7,7 @@
 //------------------------------------------------------------------//
 // printf (c)                                                       //
 //------------------------------------------------------------------//
+dcl-s gLongueVariable varchar(256) template;
 dcl-ds LIVRERST_Detail template qualified;
          code int(10);
          titre varchar(132);
