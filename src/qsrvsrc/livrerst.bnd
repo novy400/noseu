@@ -1,0 +1,4 @@
+STRPGMEXP  PGMLVL(*CURRENT) SIGNATURE('LIVRERST_0.0.1') 
+   EXPORT     SYMBOL('LIVRERST_GETALL')
+   EXPORT     SYMBOL('LIVRERST_GETBYCODE')
+ENDPGMEXP                                                        

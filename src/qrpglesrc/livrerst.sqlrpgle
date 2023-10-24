@@ -2,18 +2,17 @@
 ctl-opt nomain
         option(*nodebugio:*srcstmt:*nounref)
         alwnull(*usrctl)
-        pgminfo(*pcml:*module:*dclcase)
         bnddir('QC2LE');
 /include '../qrpgleref/livrerst.rpgleinc'
 
 dcl-proc LIVRERST_GETALL export;
-  dcl-pi ind;
+  dcl-pi *n ind;
       pLivres likeds(LIVRERST_Item) dim(1000) options(*varsize);
   end-pi;
   dcl-s lUrl like(gLongueVariable);
   dcl-s lHeader like(gLongueVariable);
   dcl-s lMsg like(gLongueVariable);
-  dcl-s lUriBook like(gLongueVariable);
+  dcl-s lUriBook varchar(256);
   dcl-s lUriPhoto like(gLongueVariable);
 monitor;
 // initialisation
@@ -34,13 +33,12 @@ snd-msg ('HEADER: ' + %trim(lHeader) + '.');
   DECLARE CUR_listeBook CURSOR FOR
     SELECT a.id, a.titre
     FROM JSON_TABLE(
-            HTTP_GET(Http_Get(:lUriBook,:lHeader),
-            '$'
-            COLUMNS(
+            HTTP_GET(:lUriBook,:lHeader),
+            '$' COLUMNS(
                 id INTEGER PATH 'lax $.id', 
                 titre VARCHAR(132) PATH 'lax $.title'
-                  )
-        ) AS a
+                ) ERROR on error
+                ) as a
     order by a.id    
     optimize for 1000 rows
     for read only;
@@ -69,16 +67,16 @@ snd-msg ('HEADER: ' + %trim(lHeader) + '.');
 // finalisation  
 on-error;
   // 💥 hooreur !
-  clear pLivres
+  clear pLivres;
   snd-msg *escape ('Horreur ! dans ' + %trim(%proc()));
   return *off;
 endmon;
 return *on;
 end-proc;
 
-dcl-proc LIVRERST_Detail export;
-  dcl-pi ind;
-      pId like(LIVRERST_Detail.id) const;
+dcl-proc LIVRERST_GETBYCODE export;
+  dcl-pi *n ind;
+      pCode like(LIVRERST_Detail.code) const;
       pLivre  likeds(LIVRERST_Detail);
   end-pi;
   dcl-s lUrl like(gLongueVariable);
@@ -106,35 +104,30 @@ dcl-proc LIVRERST_Detail export;
    with BOOKS as (
     SELECT p.id, p.titre, p.description, p.nombrePages
     FROM JSON_TABLE(
-            HTTP_GET(Http_Get(:lUriBook,:lHeader),
-            '$'
-            COLUMNS(
+            HTTP_GET(:lUriBook,:lHeader),
+            '$' COLUMNS(
                 id INTEGER PATH 'lax $.id', 
                 titre VARCHAR(132) PATH 'lax $.title',
                 description VARCHAR(132) PATH 'lax $.description',
                 nombrePages INTEGER PATH 'lax $.pageCount'
-                )
-        ) AS a
-        where p.id = :pId
+                ) ERROR on error ) AS a
+        where p.id = :pCode
     ),
     PHOTOS as (
      SELECT a.idBook,a.url
     FROM JSON_TABLE(
-            HTTP_GET(Http_Get(:lUriPhoto,:lHeader)),
-            '$'
-            COLUMNS(
+            HTTP_GET(:lUriPhoto,:lHeader),
+            '$' COLUMNS(
                 id INTEGER PATH 'lax $.id', 
                 idBook INTEGER PATH 'lax $.idBook', 
                 url VARCHAR(132) PATH 'lax $.url'
-                )
-        ) AS a
+                ) ERROR on error )  AS a
         where idBook <> 101
     )
-    select p.id, p.titre, p.description, p.nombrePages,a.url
+    select b.id, b.titre, b.description, b.nombrePages,p.url
     into :pLivre
-    from books b left join photos p on b.id = p.idBook
-    optimize for 1000 rows
-    for read only;
+    from books b left join photos p on b.id = p.idBook;
+
     select;
       when  SqlCode < 0;
         return *off;
@@ -144,10 +137,10 @@ dcl-proc LIVRERST_Detail export;
       return *on;
   endsl;
   // finalisation 
-  return;
+  return *on;
   on-error;
   // 💥 hooreur !
-  clear pLivres
+  clear pLivre;
   snd-msg *escape ('Horreur ! dans ' + %trim(%proc()));
   return *off;
   endmon;

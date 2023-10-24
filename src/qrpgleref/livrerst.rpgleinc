@@ -7,7 +7,7 @@
 //------------------------------------------------------------------//
 // printf (c)                                                       //
 //------------------------------------------------------------------//
-dcl-s gLongueVariable varchar(256) template;
+dcl-s gLongueVariable varchar(256);
 dcl-ds LIVRERST_Detail template qualified;
          code int(10);
          titre varchar(132);
@@ -25,7 +25,7 @@ dcl-pr LIVRERST_GETALL ind extproc(*dclcase);
 end-pr;
 
 dcl-pr LIVRERST_GETBYCODE ind extproc(*dclcase);
-         id like(LIVRERST_Detail.id) const;
+         code like(LIVRERST_Detail.code) const;
          livre  likeds(LIVRERST_Detail);
 end-pr;
 

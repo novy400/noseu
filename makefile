@@ -1,3 +1,5 @@
+PROJET= NOSEU
+BIN_LIB=$(PROJET)BIN
 DB_LIB=QIWS
 DBGVIEW=*ALL
 DBGVIEWSQL=*SOURCE
@@ -8,13 +10,13 @@ CCSID=297
 # The shell we use
 SHELL=/QOpenSys/usr/bin/qsh
 
-all: crtlib init 
+all: crtlib init livrerst.srvpgm
 
 # rules
 crtlib: $(BIN_LIB).lib
 # TODO: dans init ajouter le chargement de la table 
 init: 
-
+livrerst.srvpgm : livrerst.inc livrerst.sqlrpgle
 %.lib:
 	-system -q "CRTLIB $*"
 	@touch $@
@@ -42,6 +44,15 @@ init:
 	liblist -af $(LIBLIST);\
 	system "CRTSQLRPGI OBJ($(BIN_LIB)/$*) SRCSTMF('$<') COMMIT(*NONE) OBJTYPE(*MODULE) RPGPPOPT(*LVL2) COMPILEOPT('TGTCCSID($(CCSID))') DBGVIEW($(DBGVIEWSQL))"
 	@touch $@
+
+%.srvpgm: src/qsrvsrc/%.bnd
+	$(eval modules := $(patsubst %,$(BIN_LIB)/%,$(basename $(filter %.rpgle %.sqlrpgle,$(notdir $^)))))
+	system "CHGATR OBJ('$<') ATR(*CCSID) VALUE(1208)" 
+	liblist -af $(LIBLIST);\
+	system "CRTSRVPGM SRVPGM($(BIN_LIB)/$*) MODULE($(modules)) OPTION(*DUPPROC) SRCSTMF('$<')"
+
+	@touch $@
+	system "DLTOBJ OBJ($(BIN_LIB)/*ALL) OBJTYPE(*MODULE)"
 
 %.entry:
     # Basically do nothing..
