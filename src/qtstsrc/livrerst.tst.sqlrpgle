@@ -32,6 +32,7 @@ end-pi;
 dcl-ds lLivres likeds(LIVRERST_Item) dim(1000);
 clear lLivres;
 LIVRERST_GETALL(lLivres);
-sorta lLivres %fields(code);
+// sorta lLivres %fields(code);
 assert(lLivres(1).code > 0 : 'aucun livre trouvé !');
+assert(lLivres(1).code = 1 : 'code livre incorrect !');
 end-proc;

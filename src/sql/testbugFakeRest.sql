@@ -124,4 +124,14 @@ with BOOKS as (
     where idBook <> 101
     )
     select b.*,p.* from books b left exception join photos p on b.id = p.idBook;   
-    
+ -- liste des books
+ SELECT a.id, a.titre
+    FROM JSON_TABLE(
+            HTTP_GET('https://fakerestapi.azurewebsites.net/api/v1/Books',
+            '{"header": "Accept,application/json","header": "Content-Type,application/json","signalErrors" : "true"}'),
+            '$' COLUMNS(
+                id INTEGER PATH 'lax $.id', 
+                titre VARCHAR(132) PATH 'lax $.title'
+                ) ERROR on error
+                ) as a
+    order by a.id ;   

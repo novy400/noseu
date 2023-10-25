@@ -8,14 +8,14 @@
             "type": "IBMiDebug",
             "request": "launch",
             "name": "IBM i Debug: Launch a batch debug session",
-            "user": "",
+            "user": "YV",
             "password": "",
-            "host": "",
+            "host": "power8",
             "port": 8005,
-            "library": "",
-            "program": "",
+            "library": "YV",
+            "program": "hello",
             "startBatchJobCommand": "",
-            "updateProductionFiles": false
+            "updateProductionFiles": true
         }
     ]
 }
