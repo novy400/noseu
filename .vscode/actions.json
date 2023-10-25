@@ -72,6 +72,16 @@
     "environment": "ile"
   },
   {
+    "name": "Run an rpgunit test",
+    "command": "?&RPGUNIT_LIB/RUCALLTST TSTPGM(&TST_LIB/&NAME) TSTPRC(*ALL)",
+    "deployFirst": false,
+    "environment": "ile",
+    "extensions": [
+      "SQLRPGLE",
+      "RPGLE"
+    ]
+  },  
+  {
     "extensions": [
       "GLOBAL"
     ],
@@ -88,5 +98,14 @@
     "command": "/QOpenSys/pkgs/bin/gmake &BASENAME BIN_LIB=&CURLIB ERR=*EVENTF",
     "environment": "pase",
     "deployFirst": true
-  }
+    },
+    {
+      "extensions": [
+        "GLOBAL"
+      ],
+      "name": "Test all",
+      "command": "/QOpenSys/pkgs/bin/gmake BIN_LIB=&CURLIB tst ERR=*EVENTF",
+      "environment": "pase",
+      "deployFirst": true
+    }  
 ]
