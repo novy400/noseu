@@ -8,6 +8,7 @@
 	// Example:
 	"myProc": {
 		"prefix": "myProc",
+		"scope": "rpgle",
 		"body": [
 			"dcl-proc $1 export;",
 			"\tdcl-pi *n ;",
