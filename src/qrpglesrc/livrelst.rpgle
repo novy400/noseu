@@ -10,8 +10,8 @@ Ctl-Opt Main(LIVRELST)
 Dcl-Proc LIVRELST;
   Dcl-Pi *N;
   End-Pi;
-dcl-ds lLivres likeds(LIVRERST_Item) dim(1000);
-clear lLivres;
-LIVRERST_GETALL(lLivres);
+  dcl-ds lLivres likeds(LIVRERST_Item) dim(1000);
+  clear lLivres;
+  LIVRERST_GETALL(lLivres);
   
 End-Proc;
