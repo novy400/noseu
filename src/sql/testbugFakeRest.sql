@@ -1,4 +1,4 @@
--- find a bug in FakeRestApi cf openApi https://fakerestapi.azurewebsites.net/index.html
+-- find a bug in FakeRestApi cf openApi https://fakerestapi.azurewebsites.net/index.html test
 values http_get('https://fakerestapi.azurewebsites.net/api/v1/Authors');
 SELECT *
     FROM JSON_TABLE(
