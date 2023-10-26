@@ -1,0 +1,22 @@
+{
+    "recommendations": [
+        "ibm.vscode-clle",
+        "halcyontechltd.code-for-ibmi",
+        "halcyontechltd.vscode-ibmi-walkthroughs",
+        "streetsidesoftware.code-spell-checker",
+        "halcyontechltd.vscode-db2i",
+        "usernamehw.errorlens",
+        "streetsidesoftware.code-spell-checker-french",
+        "mhutchie.git-graph",
+        "ibm.ibmidebug",
+        "halcyontechltd.vscode-ibmi-notebooks",
+        "halcyontechltd.vscode-displayfile",
+        "barrettotte.ibmi-languages",
+        "pomdtr.markdown-kroki",
+        "christian-kohler.path-intellisense",
+        "halcyontechltd.vscode-rpgle",
+        "brianjgarland.vscode-rpgfree",
+        "arjun.swagger-viewer",
+        "wayou.vscode-todo-highlight"
+    ]
+}
