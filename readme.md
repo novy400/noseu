@@ -12,3 +12,11 @@
 ## Process 
 
 ## Ressources
+## TODO
+- TODO: readme generator
+- TODO: Refactoring ?
+- TODO: test profil test
+- TODO: doc avec kroki
+- TODO: test peek et goto
+- TODO: recherche
+- TODO: codetour pour ajout rpgunit test case
