@@ -17,13 +17,16 @@
 - [ ] TODO: Refactoring ?
 - [ ] TODO: test profil test
 - [ ] TODO: doc avec kroki
-- [ ] TODO: test peek et goto
-- [ ] TODO: recherche
+- [X] test peek et goto
+![picture 3](images/c8e176b6c4cbe69cb133841dfd71e30a0afa50741c72c3607d8ae3c20314531c.png)  
+![picture 4](images/c49a7771f5f6e00d9f786e1ed4f895cf88bd0d33e778cbb3508274b802bfc6eb.png)  
+
+- [x] TODO: recherche
 - [ ] TODO: codetour pour ajout rpgunit test case
 - [ ] TODO: écrire le scénario de test
 - [X]    procedure detail dans le service
 - [ ] faire commandes pour appel procédure de service
-- [ ] ajouter des variables d'environnement pour les chemins 
+- [x] ajouter des variables d'environnement pour les chemins 
 ![picture 0](images/bcebed222361d2d8e8e41b66cf5dce481f105a50a604443df4b05c17cd98359d.png)  
 
 biz biz 
