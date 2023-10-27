@@ -6,7 +6,7 @@ RPGUNIT_LIB=RPGUNIT
 DBGVIEW=*ALL
 DBGVIEWSQL=*SOURCE
 LIBLIST= $(BIN_LIB)
-INC_LIB= '/tmp/'
+INC_LIB= '/home/yv/tmp/'
 CCSID=297
 
 # The shell we use

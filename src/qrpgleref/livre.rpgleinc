@@ -5,27 +5,27 @@
 /define LIVRE_H_DEFINED  
 /include './livrerst.rpgleinc' 
 
-//------------------------------------------------------------------//
+// ------------------------------------------------------------------//
 // printf (c)                                                       //
-//------------------------------------------------------------------//
+// ------------------------------------------------------------------//
 dcl-ds LIVRE_Detail template qualified;
-         code like(LIVRERST_Detail.code);
-         titre like(LIVRERST_Detail.titre);
-         description like(LIVRERST_Detail.description);
-         nombrePages like(LIVRERST_Detail.nombrePages);
-         urlPhoto like(LIVRERST_DetailurlPhoto);
+  code like(LIVRERST_Detail.code);
+  titre like(LIVRERST_Detail.titre);
+  description like(LIVRERST_Detail.description);
+  nombrePages like(LIVRERST_Detail.nombrePages);
+  urlPhoto like(LIVRERST_DetailurlPhoto);
 end-ds;
 dcl-ds LIVRE_Item template qualified;
-         code like(LIVRE_Detail.code);
-         titre like(LIVRE_Detail.titre);
+  code like(LIVRE_Detail.code);
+  titre like(LIVRE_Detail.titre);
 end-ds;
 
 dcl-pr LIVRE_GETALL ind extproc(*dclcase);
-   livres likeds(LIVRE_Item) dim(1000) options(*varsize);
+  livres likeds(LIVRE_Item) dim(1000) options(*varsize);
 end-pr;
 
 dcl-pr LIVRE_GETBYCODE ind extproc(*dclcase);
-   id like(LIVRE_Detail.id) const;
-   livre likeds(LIVRE_Detail);
+  id like(LIVRE_Detail.id) const;
+  livre likeds(LIVRE_Detail);
 end-pr;
 

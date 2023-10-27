@@ -1,5 +1,4 @@
 **free
-**FREE
 Ctl-Opt Main(LIVRELST)
         option(*nodebugio:*srcstmt:*nounref)
         alwnull(*usrctl)
