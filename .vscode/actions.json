@@ -103,6 +103,24 @@
       "extensions": [
         "GLOBAL"
       ],
+      "name": "Build srvpgm current",
+      "command": "/QOpenSys/pkgs/bin/gmake &NAMEL.srvpgm BIN_LIB=&CURLIB ERR=*EVENTF",
+      "environment": "pase",
+      "deployFirst": true
+    }, 
+    {
+      "extensions": [
+        "GLOBAL"
+      ],
+      "name": "Build pgm current",
+      "command": "/QOpenSys/pkgs/bin/gmake &NAMEL.pgm BIN_LIB=&CURLIB ERR=*EVENTF",
+      "environment": "pase",
+      "deployFirst": true
+    },       
+    {
+      "extensions": [
+        "GLOBAL"
+      ],
       "name": "Test all",
       "command": "/QOpenSys/pkgs/bin/gmake BIN_LIB=&CURLIB tst ERR=*EVENTF",
       "environment": "pase",

@@ -1,5 +1,20 @@
 {
     "cSpell.words": [
         "kroki"
+    ],
+    "todohighlight.include": [
+
+        "**/*.js",
+        "**/*.jsx",
+        "**/*.ts",
+        "**/*.tsx",
+        "**/*.html",
+        "**/*.php",
+        "**/*.css",
+        "**/*.scss",
+        "**/*.sqlrpgle",
+        "**/*.rpgle",
+        "**/*.sql",
+        "**/*.md"
     ]
 }

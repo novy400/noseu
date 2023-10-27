@@ -6,13 +6,13 @@ RPGUNIT_LIB=RPGUNIT
 DBGVIEW=*ALL
 DBGVIEWSQL=*SOURCE
 LIBLIST= $(BIN_LIB)
-INC_LIB= '/home/YV/include/'
+INC_LIB= '/tmp/'
 CCSID=297
 
 # The shell we use
 SHELL=/QOpenSys/usr/bin/qsh
 
-all: crtlib init livrerst.srvpgm livrerst.bnddir livrelst.pgm
+all: crtlib init livrerst.srvpgm noseu.bnddir livrelst.pgm
 
 # rules
 crtlib: $(BIN_LIB).lib
@@ -76,6 +76,7 @@ tst: $(TST_LIB).lib livrerst.srvpgm livrerst.tst
 	liblist -af $(LIBLIST) $(TST_LIB) $(RPGUNIT_LIB);\
 	system "RUCALLTST TSTPGM($(TST_LIB)/$*)"
 	@touch $@
+	system "DLTOBJ OBJ($(TST_LIB)/*ALL) OBJTYPE(*MODULE)"
 
 %.entry:
     # Basically do nothing..
