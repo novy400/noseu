@@ -8,7 +8,7 @@
 	// Example:
 	"myProc": {
 		"prefix": "myProc",
-		"scope": "rpgle",
+		"scope": "rpgle,sqlrpgle",
 		"body": [
 			"dcl-proc $1 export;",
 			"\tdcl-pi *n ;",
@@ -25,6 +25,23 @@
 			"end-proc;",
 			"$4"
 		],
-		"description": "Create prototype for external program"
+		"description": "Create prototype for export procedure"
+	},
+	"myTestCaseProc": {
+		"prefix": "myTestCaseProc",
+		"scope": "rpgle,sqlrpgle",
+		"body": [
+			"dcl-proc test_ $1 export;",
+			"\tdcl-pi *n ;",
+			"\tend-pi;",
+			"\t// déclaration des variables",
+			"\t// initialisation des variables",
+			"\t// appel de la procédure à tester",
+			"\t// vérification des résultats ",
+			"\tassert(lLivres(1).code > 0 : 'aucun livre trouvé !');"
+			"end-proc;"
+		],
+		"description": "Create an test case for a procedure"
 	}
+
 }

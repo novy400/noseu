@@ -112,7 +112,7 @@ dcl-proc LIVRERST_GETBYCODE export;
                 titre VARCHAR(132) PATH 'lax $.title',
                 description VARCHAR(132) PATH 'lax $.description',
                 nombrePages INTEGER PATH 'lax $.pageCount'
-                ) ERROR on error ) AS a
+                ) ERROR on error ) AS p
         where p.id = :pCode
     ),
     PHOTOS as (
@@ -126,7 +126,7 @@ dcl-proc LIVRERST_GETBYCODE export;
                 ) ERROR on error )  AS a
         where idBook <> 101
     )
-    select b.id, b.titre, b.description, b.nombrePages,p.url
+    select b.id, b.titre, b.description, b.nombrePages, p.url
     into :pLivre
     from books b left join photos p on b.id = p.idBook;
 

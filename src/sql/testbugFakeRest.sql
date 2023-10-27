@@ -135,3 +135,59 @@ with BOOKS as (
                 ) ERROR on error
                 ) as a
     order by a.id ;   
+-- biz bie ko 
+   with BOOKS as (
+    SELECT p.id, p.titre, p.description, p.nombrePages
+    FROM JSON_TABLE(
+            HTTP_GET('https://fakerestapi.azurewebsites.net/api/v1/Books',
+            '{"header": "Accept,application/json","header": "Content-Type,application/json","signalErrors" : "true"}'),
+            '$' COLUMNS(
+                id INTEGER PATH 'lax $.id', 
+                titre VARCHAR(132) PATH 'lax $.title',
+                description VARCHAR(132) PATH 'lax $.description',
+                nombrePages INTEGER PATH 'lax $.pageCount'
+                ) ERROR on error ) AS a
+        -- where p.id = 1
+    ),
+    PHOTOS as (
+     SELECT a.idBook,a.url
+    FROM JSON_TABLE(
+            HTTP_GET('https://fakerestapi.azurewebsites.net/api/v1/CoverPhotos',
+            '{"header": "Accept,application/json","header": "Content-Type,application/json","signalErrors" : "true"}'),
+            '$' COLUMNS(
+                id INTEGER PATH 'lax $.id', 
+                idBook INTEGER PATH 'lax $.idBook', 
+                url VARCHAR(132) PATH 'lax $.url'
+                ) ERROR on error )  AS a
+        where idBook <> 101
+    )
+    select b.*,p.*
+    from books b left join photos p on b.id = p.idBook;
+
+    with BOOKS as (
+    SELECT p.id, p.titre, p.description, p.nombrePages
+    FROM JSON_TABLE(
+            HTTP_GET('https://fakerestapi.azurewebsites.net/api/v1/Books', ''),
+            '$'
+            COLUMNS(
+                id INTEGER PATH 'lax $.id', 
+                titre VARCHAR(132) PATH 'lax $.title',
+                description VARCHAR(132) PATH 'lax $.description',
+                nombrePages INTEGER PATH 'lax $.pageCount'
+                )
+        ) AS p where p.id = 1
+    ),
+    PHOTOS as (
+     SELECT a.idBook,a.url
+    FROM JSON_TABLE(
+            HTTP_GET('https://fakerestapi.azurewebsites.net/api/v1/CoverPhotos', ''),
+            '$'
+            COLUMNS(
+                id INTEGER PATH 'lax $.id', 
+                idBook INTEGER PATH 'lax $.idBook', 
+                url VARCHAR(132) PATH 'lax $.url'
+                )
+        ) AS a
+    where idBook <> 101
+    )
+    select b.id, b.titre, b.description, b.nombrePages, p.url from books b join photos p on b.id = p.idBook
