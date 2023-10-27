@@ -14,16 +14,17 @@
 ## Ressources
 ## TODO
 - [ ] TODO: readme generator
-- [ ] TODO: Refactoring ?
 - [ ] TODO: test profil test
 - [ ] TODO: doc avec kroki
+- [ ] playlist spécifique présentation
+- [ ]
 - [X] test peek et goto
 ![picture 3](images/c8e176b6c4cbe69cb133841dfd71e30a0afa50741c72c3607d8ae3c20314531c.png)  
 ![picture 4](images/c49a7771f5f6e00d9f786e1ed4f895cf88bd0d33e778cbb3508274b802bfc6eb.png)  
 
 - [x] TODO: recherche
-- [ ] TODO: codetour pour ajout rpgunit test case
-- [ ] TODO: écrire le scénario de test
+- [ ] codetour pour ajout rpgunit test case
+- [ ] TODO: écrire le scénario de présentation démo ==> se filmer en train de le faire
 - [X]    procedure detail dans le service
 - [ ] faire commandes pour appel procédure de service
 - [x] ajouter des variables d'environnement pour les chemins 

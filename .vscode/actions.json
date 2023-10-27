@@ -82,6 +82,16 @@
     ]
   },  
   {
+    "name": "Run an rpgunit test prompt",
+    "command": "&RPGUNIT_LIB/RUCALLTST TSTPGM(&TST_LIB/&NAME) TSTPRC(${tstprc|procédure à tester|*ALL,test_LIVRERST_GETALL,test_LIVRERST_GETBYCODE})",
+    "deployFirst": false,
+    "environment": "ile",
+    "extensions": [
+      "SQLRPGLE",
+      "RPGLE"
+    ]
+  },   
+  {
     "extensions": [
       "GLOBAL"
     ],
