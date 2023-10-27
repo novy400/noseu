@@ -20,6 +20,7 @@ crtlib: $(BIN_LIB).lib
 init: 
 livrerst.srvpgm: livrerst.inc livrerst.sqlrpgle
 livrelst.pgm: livrerst.srvpgm livrelst.rpgle
+livredet.pgm: livrerst.srvpgm livredet.rpgle
 noseu.bnddir: livrerst.entry
 tst: $(TST_LIB).lib livrerst.srvpgm livrerst.tst
 
