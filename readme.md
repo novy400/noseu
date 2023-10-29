@@ -1,10 +1,10 @@
 # YABUG.
-> avec vscode et codeForI le code devient une aventure !
+> avec vsCode et code4I le code devient une aventure !
 
 ## Pré-Requis
 
 ## Install and Build
-1. `git clone https://github.com/novy400/gestionErreur.git` this repository
+1. `git clone https://github.com/novy400/yabug.git` this repository
 
 
 1. Run `make BIN_LIB=YOURBIB` (available from yum) en remplaçant YOURBIB par votre bibliothèque.
@@ -14,11 +14,13 @@
 
 ## Ressources
 ## TODO
-- [ ] TODO: readme generator
+- [ ] TODO: readme generator 
+    - [github readme](https://github.com/SashenJayathilaka/Awesome-Github-Readme-Generator)
+    - [cloud](https://www.genreadme.cloud/)
 - [ ] TODO: test profil test
 - [ ] TODO: doc avec kroki
 - [ ] playlist spécifique présentation
-- [ ]
+- [ ] codeTour pour présentation
 - [X] test peek et goto
 ![picture 3](images/c8e176b6c4cbe69cb133841dfd71e30a0afa50741c72c3607d8ae3c20314531c.png)  
 ![picture 4](images/c49a7771f5f6e00d9f786e1ed4f895cf88bd0d33e778cbb3508274b802bfc6eb.png)  

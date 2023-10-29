@@ -17,6 +17,9 @@
         "halcyontechltd.vscode-rpgle",
         "brianjgarland.vscode-rpgfree",
         "arjun.swagger-viewer",
-        "wayou.vscode-todo-highlight"
+        "wayou.vscode-todo-highlight",
+        "vsls-contrib.codetour",
+        "pkief.material-icon-theme",
+        "bierner.github-markdown-preview"
     ]
 }
