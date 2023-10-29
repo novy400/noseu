@@ -1,4 +1,4 @@
-# YABGUB.
+# YABUG.
 > avec vscode et codeForI le code devient une aventure !
 
 ## Pré-Requis
