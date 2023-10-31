@@ -16,5 +16,7 @@
         "**/*.rpgle",
         "**/*.sql",
         "**/*.md"
-    ]
+    ],
+    "excalidraw.theme": "dark",
+    "excalidraw.language": "fr-FR"
 }
