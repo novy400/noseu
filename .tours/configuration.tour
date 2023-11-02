@@ -4,14 +4,26 @@
   "steps": [
     {
       "title": "Introduction",
-      "description": "## objectifs\r\n- créer une branche git.\r\n- faire un premier commit.\r\n- se connecter avec notre profil à l'IBMi.\r\n- configurer notre connexion IBMi.\r\n- configurer notre environnement de projet."
+      "description": "## objectifs\r\n1. créer une branche git.\r\n1. se connecter avec notre profil à l'IBMi.\r\n1. configurer notre connexion IBMi.\r\n1. configurer notre environnement de projet.\r\n1. faire un premier commit."
     },
     {
       "title": "Création de la branche GIT.",
+      "description": "# Création de notre branche de travail.\r\n1. créer une nouvelle branche \r\n    via le menu en tapant  `F1` puis  *branch* et enfin en sélectionnant `Git: Create Branch...`  \r\n    ![panneau GIT](./images/52fea74ae1a2117d5a884fb1604fd8ce768952f0066fc10d74296c40584fa182.png)\r\n1. nommer la nouvelle branche  \r\n    ![panneau GIT](./images/abd20daf26391a865225353a588fa823c78b825dcfafefa3ecb3214e297358b1.png)"
+    },
+    {
+      "title": "Connexion à l'IBMi.",
+      "description": "# Connexion à l'IBMi.\r\n1. ouvrir le panneau IBMI.  \r\n    ![picture 5](./images/698be98c5f25603d8104e1227787a5efc3e6f19919aa933a82b92b9c51462469.png)\r\n\r\n1. créer une nouvelle connexion.    \r\n    ![picture 7](./images/9da7bf94d0764c9365cf23d3f2928c8034ebf477b5d65e6226d9ac53ffcf6200.png)\r\n\r\n1. configurer votre connexion.\r\n    - connection Name : ce Que Vous Voulez !\r\n    - Host or IP Address : le nom de host ou l'adresse de l'IBMi.\r\n    - UserName :  votre profil IBMi.\r\n    - PassWord :  votre mot de passe IBMi.\r\n    - vous poouvez cocher `Save Password`\r\n    - valider via le bouton  `Connect`  \r\n    ![picture 8](./images/a7966b7318d5a4d65b44def423ba945f7e42788a984ab7d7d9f00ca706d4a278.png) \r\n\r\n1. repondre aux questions.\r\n    - oui pour le répertoire de déploiement mias cela peut être fait plus tard.\r\n    - oui pour ouverture de la gestion de configuration.   \r\n    ![picture 9](./images/e90cdd8b57c707e2269a90523b28e6a27310148fa6703a58dd9a23b69b7a064d.png) \r\n      \r\n1. configurer  \r\n    ![picture 10](./images/71747ecae3939624484ea1e50abd6c14d919656b786ed1834a9156a97e428b3d.png)     \r\n"
+    },
+    {
+      "title": "Configuration IBMi de notre projet.",
+      "description": "# Configurer IBMi de notre projet.  \r\n\r\n1. configurer la bibliothéque courante. \r\n \r\n    ![picture 11](./images/9938fbe2235c10d93868c317b213bbdeb56b7109bd4371465064a0276cdbb2ca.png)  \r\n \r\n1. ajout d'une bibliothéque de test.  \r\n\r\n    ![picture 12](./images/c9d4840e5b6b2547f556930cec3b16b51ee2354f3fa32598bbe08ae40f416b66.png)\r\n    ![picture 13](./images/17047ef64e2f1315b28c42e22a493204dede02f2eaeae4d3c49fad869d51b621.png)  \r\n\r\n1. configurer la liste des bibliothéques courantes.\r\n  \r\n    ![picture 16](./images/3d0297b670113a8bfd19f268a18052dfb8ca943d20abb8e2f25bef6f8cf68698.png)\r\n    ![picture 15](./images/975c67aec180cd96889b169c56b4896e19626a9e42a0ca88b0a430ca397fe401.png)  \r\n    \r\n1. créer/modifier un filtre sur les objets PGM de la nouvelle bibliothéque.\r\n\r\n    ![picture 19](./images/41818f568b85a0468ed070286226e428b1e40aa7e560295ebc9f078c82d09607.png)  \r\n    ![picture 17](./images/4478fa5eefd63b62c970853997f18ac18c0e5b3e6d70a4c79e286caaed0680e2.png)\r\n    ![picture 20](./images/c6847ef9397fd6ff1a99af83d73356183b16118e34b51f7873f26455dc9df7a0.png)   \r\n    ![picture 21](./images/245237e9d1845a159d3aa03950a853a0a13c3b85233aa0d04d646463e1d2e9e2.png)  \r\n    ![picture 22](./images/57a063987a4ff4a17a8923a0d951778495405f75dd8b3b78c9a0dba37d6bd303.png)   \r\n    ![picture 23](./images/1f52c77932efe4712f855ec6042a4f0a373e5ccceb6e2a0ce18930abc8215627.png) \r\n  \r\n1. ouvrir un répertoire de l'IFS.\r\n\r\n    ![picture 24](./images/db296b77bbba41bb97b771d9846c6a2a36906f6c8d9fa21d14879390a1d74aed.png)    \r\n     \r\n1. ajouter un lien vers ce répertoire.\r\n\r\n    ![picture 25](./images/6d0ee11f9bf42c4cd03bd4cc5f98301fee0ec6ba6bdab77df1fe72d6f601a0d0.png)    \r\n    ![picture 26](./images/478c9f9fb670e7cc02a5d8d263b2e7be2f0fcced3186086dcac7ed9ab959ce01.png)  \r\n\r\n1. configurer la répertoire IFS de déploiement.(/home/builds/nom_projet)\r\n\r\n    ![picture 27](./images/9e0e18d7c1d66013c18699f37cd7d56aa5081bd2723b1418a1feab4fd8d9c6e9.png)\r\n    - ne déployer pas maintenant.\r\n1. sauvegarde dans un profil.     \r\n    ![picture 28](./images/9ddc8fe6ab53b07500db781cb578b4f879ec6b9ff153a8be5260992338fb2685.png) \r\n    ![picture 29](./images/9f5480c939e576fe0e1dd7ace7829347c73dfe48f4cc25b35f9b64cedd536f52.png)    \r\n    ![picture 30](./images/311ac3410153a9207909275e27bbd4716e1f739f0df4f516c589cdced02adc0a.png)\r\n1. retrouver les différentes configuration dans le fichier settings.json.    \r\n\r\n    [voir le settings.json](command:workbench.action.openSettingsJson)"
+    },
+    {
+      "title": "Configuration locale de notre projet.",
       "description": "# Création de notre branche de travail.\r\n## créer une nouvelle branche \r\nvia le menu en tapant  `F1` puis  *branch* et enfin en sélectionnant `Git: Create Branch...`  \r\n![panneau GIT](./images/52fea74ae1a2117d5a884fb1604fd8ce768952f0066fc10d74296c40584fa182.png)\r\n## nommer la nouvelle branche\r\n![panneau GIT](./images/abd20daf26391a865225353a588fa823c78b825dcfafefa3ecb3214e297358b1.png)"
     },
     {
-      "title": "Création du Commit initial.",
+      "title": "Sauvegarde de notre configuration.",
       "description": "# Sauvegarde de l'état via un commit initial.\r\n## ouvrir la vue des contrôles de source.\r\ntaper `CTrl + Shift + G`\r\n## nommer le commit et valider  \r\n![panneau GIT](./images/dea15931f33798af26005fc30a3e44a5a577fff56bbd98a8c7b68f585dc38b0f.png)"
     }
   ]
