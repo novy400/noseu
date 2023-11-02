@@ -29,7 +29,17 @@
 ![picture 28](../images/9ddc8fe6ab53b07500db781cb578b4f879ec6b9ff153a8be5260992338fb2685.png)  
 ![picture 29](../images/9f5480c939e576fe0e1dd7ace7829347c73dfe48f4cc25b35f9b64cedd536f52.png)
 ![picture 30](../images/311ac3410153a9207909275e27bbd4716e1f739f0df4f516c589cdced02adc0a.png)  
-  
+  @command:workbench.files.action.focusFilesExplorer
+![picture 31](../images/bad2509deb77959845f1eed08347e2f3cc4227811c062318a2519b2fa2799c3e.png)  
+![picture 32](../images/68df4ebda4403e73c3e7212bb07c36e6070afb1c1ec2b389eb6cb3712182ae47.png)  
+![picture 33](../images/bd1cee4f2ce8fba5212b0932c732a45c9240e5567f0e84f3de9302e4a5840abe.png)  
+![picture 34](../images/f9213a3f06ed7eaa7268a9221adae199e04a29fdd2f01d0d1c4a689e85cb379a.png)  
+![picture 35](../images/bbeaef4593f39f9bc1c09d51ec82796c6d114cc01b05389e220bfb64c55e9ff9.png)  
+
+
+
+
+
 
 
 
