@@ -38,6 +38,13 @@
 
 
 
+![picture 36](../images/3464ff9855dd5d2851452e0e5f434021ec2987ecaffa05df094b45c6611c9459.png)  
+![picture 37](../images/31cf7474cacdf14fab0c994f996a4427bdd8c208fccf4681c8750c447fb2892a.png) 
+![picture 38](../images/a7dfddc9c26205cd96c031cec4c74bbfbd6fc079db5d45ade5f502cb474abc44.png)  
+ 
+
+![picture 39](../images/8f6136d21006211cc8a618420a7bdb4b84e70d2358477513311a8194dbb105a9.png)  
+
 
 
 

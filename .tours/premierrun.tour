@@ -1,0 +1,59 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "PremierRun",
+  "steps": [
+    {
+      "title": "Introduction",
+      "description": "## Objectifs\r\n1. déployer notre projet sur IFS dans répertoire de déploiement.\r\n1. builder l'ensemble du projet.\r\n1. tester le build.\r\n1. appeler la liste des livres.\r\n1. appeler le détail d'un livre."
+    },
+    {
+      "title": "déploiment",
+      "description": ""
+    },
+    {
+      "file": "makefile",
+      "description": "ajout de notre environnement ",
+      "line": 1,
+      "title": "choix de l'environnement."
+    },
+    {
+      "file": "makefile",
+      "description": "ajout des tâches et différentes objets à créer.",
+      "line": 11,
+      "title": "liste des tâches du build"
+    },
+    {
+      "file": "makefile",
+      "description": "ajout des dépendances",
+      "line": 17,
+      "title": "définition des dépendances"
+    },
+    {
+      "file": "makefile",
+      "description": "configuration des tâches à réaliser selon les types de cible.",
+      "line": 51,
+      "title": "liste des actions"
+    },
+    {
+      "title": "construction",
+      "description": ""
+    },
+    {
+      "file": ".vscode/actions.json",
+      "description": "action pour build\r\n\r\n",
+      "line": 101
+    },
+    {
+      "title": "lancer le Build",
+      "description": "- taper `Ctrl-E` puis `build all`.    \r\n\r\n![picture 36](./images/3464ff9855dd5d2851452e0e5f434021ec2987ecaffa05df094b45c6611c9459.png)  \r\n- déployer tous les fichiers.    \r\n \r\n![picture 37](./images/31cf7474cacdf14fab0c994f996a4427bdd8c208fccf4681c8750c447fb2892a.png)\r\n\r\n- ok ?    \r\n\r\n![picture 38](./images/a7dfddc9c26205cd96c031cec4c74bbfbd6fc079db5d45ade5f502cb474abc44.png) "
+    },
+    {
+      "title": "tests",
+      "description": ""
+    },
+    {
+      "title": "utilisation",
+      "description": ""
+    }
+  ]
+}

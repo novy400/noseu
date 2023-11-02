@@ -24,7 +24,17 @@
     },
     {
       "title": "Sauvegarde de notre configuration.",
-      "description": "# Sauvegarde de l'état via un commit initial.\r\n\r\n## ouvrir la vue des contrôles de source.\r\ntaper `CTrl + Shift + G`\r\n## nommer le commit et valider  \r\n![panneau GIT](./images/dea15931f33798af26005fc30a3e44a5a577fff56bbd98a8c7b68f585dc38b0f.png)  \r\nconfirmer  \r\n![picture 35](./images/bbeaef4593f39f9bc1c09d51ec82796c6d114cc01b05389e220bfb64c55e9ff9.png) "
+      "description": "# Sauvegarde de l'état via un commit initial.\r\n1. modifier le fichier .gitignore\r\n    normalement on écarte de la gestion de version les fichiers pouvant contenir des informations confidentielles.\r\n    c'est pourquoi le fichier .env se trouve dans le fichier .gitignore.\r\n    pour faciliter le déploiement nous allos le commenenter.    \r\n\r\n    ![picture 39](./images/8f6136d21006211cc8a618420a7bdb4b84e70d2358477513311a8194dbb105a9.png)     \r\n \r\n1. ouvrir la vue des contrôles de source.\r\ntaper `CTrl + Shift + G`\r\n1. nommer le commit et valider  \r\n![panneau GIT](./images/dea15931f33798af26005fc30a3e44a5a577fff56bbd98a8c7b68f585dc38b0f.png)  \r\nconfirmer  \r\n![picture 35](./images/bbeaef4593f39f9bc1c09d51ec82796c6d114cc01b05389e220bfb64c55e9ff9.png) ",
+      "selection": {
+        "start": {
+          "line": 7,
+          "character": 97
+        },
+        "end": {
+          "line": 8,
+          "character": 1
+        }
+      }
     }
   ]
 }
