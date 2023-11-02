@@ -1,0 +1,18 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Configuration",
+  "steps": [
+    {
+      "title": "Introduction",
+      "description": "## objectifs\r\n- créer une branche git.\r\n- faire un premier commit.\r\n- se connecter avec notre profil à l'IBMi.\r\n- configurer notre connexion IBMi.\r\n- configurer notre environnement de projet."
+    },
+    {
+      "title": "Création de la branche GIT.",
+      "description": "# Création de notre branche de travail.\r\n## créer une nouvelle branche \r\nvia le menu en tapant  `F1` puis  *branch* et enfin en sélectionnant `Git: Create Branch...`  \r\n![panneau GIT](./images/52fea74ae1a2117d5a884fb1604fd8ce768952f0066fc10d74296c40584fa182.png)\r\n## nommer la nouvelle branche\r\n![panneau GIT](./images/abd20daf26391a865225353a588fa823c78b825dcfafefa3ecb3214e297358b1.png)"
+    },
+    {
+      "title": "Création du Commit initial.",
+      "description": "# Sauvegarde de l'état via un commit initial.\r\n## ouvrir la vue des contrôles de source.\r\ntaper `CTrl + Shift + G`\r\n## nommer le commit et valider  \r\n![panneau GIT](./images/dea15931f33798af26005fc30a3e44a5a577fff56bbd98a8c7b68f585dc38b0f.png)"
+    }
+  ]
+}
