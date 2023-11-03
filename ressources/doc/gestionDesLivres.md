@@ -21,6 +21,27 @@ erDiagram
     }
 
 ```
+## Ancienne architecture
+```mermaid    
+classDiagram
+
+    class BOOK{
+        int code        
+        string titre
+        string description
+        int nombreDePages
+    }
+    class PHOTO{
+        int code
+        string url
+    }
+    BOOK <|-- LIVRELST
+    PHOTO <|-- LIVREDET
+    BOOK <|-- LIVREDET
+    LIVREDET : + in code
+```
+## Modernisation de l'architecture
+
 Cette table a été remplacée par l'appel d'une API externe.
 Cette API est exposée sous la forme de web services de type REST.   
 [FakerestAPi](https://fakerestapi.azurewebsites.net/index.html)

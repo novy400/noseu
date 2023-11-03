@@ -65,5 +65,6 @@ Nous allons suivre les étapes suivantes :
 - [🙏youtube Code for IBM i](https://youtube.com/playlist?list=PLNl31cqBafCp-ml8WqPeriHWLD1bkg7KL&si=gSBHoBYvtTSxMQ_m)
 - [youtube Les routes de l'IBMi](https://youtube.com/playlist?list=PL-QeQCtTJK6Esv0Hihg0Mvk87a1KamIV7&si=Nr126mUF7gKmnrF0)
 - [iRPGUnit](https://irpgunit.sourceforge.io/)
+- [gmake GNU make](https://www.gnu.org/software/make/manual/make.html)
 ## TODO
 - [ ] ajouter une image avec le logo des routes de l'IBMi et CODE4i.
