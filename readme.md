@@ -6,7 +6,9 @@
 
 Y a un bug dans ce projet, votre mission si vous l'acceptez est de le trouver et de le corriger.
 Bien entendu, vous ne serez pas seul, vous serez accompagné par un expert de la chasse aux bugs.
-VsCode et Code4I sont vos amis pour cette mission.
+VsCode et Code4I sont vos amis pour cette mission.  
+
+![picture 0](images/8ebc3b774cee159eba92e46d31ff679950a7ce78e1645e89a77f29b02d6e6456.png)  
 
 ## Objectifs.
 
