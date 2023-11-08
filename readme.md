@@ -8,7 +8,8 @@ Y a un bug dans ce projet, votre mission si vous l'acceptez est de le trouver et
 Bien entendu, vous ne serez pas seul, vous serez accompagné par un expert de la chasse aux bugs.
 VsCode et Code4I sont vos amis pour cette mission.  
 
-![picture 0](images/8ebc3b774cee159eba92e46d31ff679950a7ce78e1645e89a77f29b02d6e6456.png)  
+![picture 1](images/1a42a6243153acc842640f3081b09ed043d2a78d472f98df7608e899a005b5bb.png)  
+
 
 ## Objectifs.
 
