@@ -3,7 +3,7 @@ include .env
 DBGVIEW=*ALL
 DBGVIEWSQL=*SOURCE
 LIBLIST= $(BIN_LIB)
-CCSID=297
+CCSID=*JOB
 
 # The shell we use
 SHELL=/QOpenSys/usr/bin/qsh
