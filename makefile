@@ -1,78 +1,103 @@
-BIN_LIB=DEV
-APP_BNDDIR=APP
-LIBL=$(BIN_LIB)
+include .env
 
-INCDIR=""
-BNDDIR=($(BIN_LIB)/$(APP_BNDDIR))
-PREPATH=/QSYS.LIB/$(BIN_LIB).LIB
+DBGVIEW=*ALL
+DBGVIEWSQL=*SOURCE
+LIBLIST= $(BIN_LIB)
+CCSID=297
+
+# The shell we use
 SHELL=/QOpenSys/usr/bin/qsh
 
-all: .logs .evfevent library $(PREPATH)/$(APP_BNDDIR).BNDDIR
+all: crtlib init livrerst.srvpgm noseu.bnddir livrelst.pgm livredet.pgm
 
-$(PREPATH)/LIVRERST.SRVPGM: $(PREPATH)/LIVRERST.MODULE
-$(PREPATH)/$(APP_BNDDIR).BNDDIR: $(PREPATH)/LIVRERST.SRVPGM
+# rules
+crtlib: $(BIN_LIB).lib
+# TODO: dans init ajouter le chargement de la table 
+init: 
+livrerst.srvpgm: livrerst.inc livrerst.sqlrpgle
+livrelst.pgm: livrerst.srvpgm livrelst.pgm.rpgle
+livredet.pgm: livrerst.srvpgm livredet.pgm.rpgle
+noseu.bnddir: livrerst.entry
+tst: $(TST_LIB).lib livrerst.srvpgm livrerst.tst
 
-.logs:
-	mkdir .logs
-.evfevent:
-	mkdir .evfevent
-library:
-	-system -q "CRTLIB LIB($(BIN_LIB))"
+%.lib:
+	-system -q "CRTLIB $*"
+	@touch $@
+
+%.inc: src/qrpgleref/%.rpgleinc
+	system "CHGATR OBJ('$<') ATR(*CCSID) VALUE(1208)" 
+	cp  '$<'  $(INC_LIB)
+	@touch $@
+
+%.pgm:
+	$(eval modules := $(patsubst %,$(BIN_LIB)/%,$(basename $(filter %.pgm.rpgle %.pgm.sqlrpgle,$(notdir $<)))))
+	system "CHGATR OBJ('$<') ATR(*CCSID) VALUE(1208)" 
+	liblist -af $(LIBLIST);\
+	system "CRTPGM PGM($(BIN_LIB)/$*) MODULE($(modules))"
+	@touch $@
+
+%.pgm.rpgle: src/qrpglesrc/%.pgm.rpgle
+	system "CHGATR OBJ('$<') ATR(*CCSID) VALUE(1208)" 
+	liblist -af $(LIBLIST);\
+	system "CRTRPGMOD MODULE($(BIN_LIB)/$*) SRCSTMF('$<') DBGVIEW($(DBGVIEW)) TGTCCSID($(CCSID))"
+	@touch $@
+
+%.sqlrpgle: src/qrpglesrc/%.sqlrpgle
+	system "CHGATR OBJ('$<') ATR(*CCSID) VALUE(1208)" 
+	liblist -af $(LIBLIST);\
+	system "CRTSQLRPGI OBJ($(BIN_LIB)/$*) SRCSTMF('$<') COMMIT(*NONE) OBJTYPE(*MODULE) RPGPPOPT(*LVL2) COMPILEOPT('TGTCCSID($(CCSID))') DBGVIEW($(DBGVIEWSQL))"
+	@touch $@
+
+%.srvpgm: src/qsrvsrc/%.bnd
+	$(eval modules := $(patsubst %,$(BIN_LIB)/%,$(basename $(filter %.rpgle %.sqlrpgle,$(notdir $^)))))
+	system "CHGATR OBJ('$<') ATR(*CCSID) VALUE(1208)" 
+	liblist -af $(LIBLIST);\
+	system "CRTSRVPGM SRVPGM($(BIN_LIB)/$*) MODULE($(modules)) OPTION(*DUPPROC) SRCSTMF('$<')"
+
+	@touch $@
+	system "DLTOBJ OBJ($(BIN_LIB)/*ALL) OBJTYPE(*MODULE)"
+
+%.bnddir: 
+	-system -q "CRTBNDDIR BNDDIR($(BND_LIB)/$*)"
+	liblist -af $(LIBLIST);\
+
+	-system -q "ADDBNDDIRE BNDDIR($(BND_LIB)/$*) OBJ($(patsubst %.entry,(*LIBL/% *SRVPGM *IMMED),$^))"
+	@touch $@
+
+%.tst: src/qtstsrc/%.tst.sqlrpgle
+	system "CHGATR OBJ('$<') ATR(*CCSID) VALUE(1208)"
+	liblist -af $(LIBLIST) $(TST_LIB) $(RPGUNIT_LIB);\
+	system "CRTSQLRPGI OBJ($(TST_LIB)/$*) SRCSTMF('$<') COMMIT(*NONE) OBJTYPE(*MODULE) RPGPPOPT(*LVL2) COMPILEOPT('TGTCCSID(*JOB)') DBGVIEW($(DBGVIEWSQL))"
+	liblist -af $(LIBLIST) $(TST_LIB) $(RPGUNIT_LIB);\
+	system "CRTSRVPGM SRVPGM($(TST_LIB)/$*) BNDSRVPGM(RUTESTCASE $(BIN_LIB)/$*) EXPORT(*ALL) OPTION(*DUPPROC) MODULE($(TST_LIB)/$*)"
+	liblist -af $(LIBLIST) $(TST_LIB) $(RPGUNIT_LIB);\
+	system "RUCALLTST TSTPGM($(TST_LIB)/$*)"
+	@touch $@
+	system "DLTOBJ OBJ($(TST_LIB)/*ALL) OBJTYPE(*MODULE)"
+
+%.entry:
+    # Basically do nothing..
+	@touch $@
 
 
+clean:
+	rm -f *.pgm *.rpgle *.sqlrpgle *.cmd *.srvpgm *.dspf *.bnddir *.entry *.inc *.cmp
 
-
-$(PREPATH)/LIVREDET.MODULE: src/qrpglesrc/livredet.rpgle
-	liblist -c $(BIN_LIB);\
-	liblist -a $(LIBL);\
-	system "CRTRPGMOD MODULE($(BIN_LIB)/LIVREDET) SRCSTMF('src/qrpglesrc/livredet.rpgle') OPTION(*EVENTF) DBGVIEW(*SOURCE) TGTRLS(*CURRENT) TGTCCSID(*JOB)" > .logs/livredet.splf || \
-	(system "CPYTOSTMF FROMMBR('$(PREPATH)/EVFEVENT.FILE/LIVREDET.MBR') TOSTMF('.evfevent/livredet.evfevent') DBFCCSID(*FILE) STMFCCSID(1208) STMFOPT(*REPLACE)"; $(SHELL) -c 'exit 1')
-$(PREPATH)/LIVRELST.MODULE: src/qrpglesrc/livrelst.rpgle
-	liblist -c $(BIN_LIB);\
-	liblist -a $(LIBL);\
-	system "CRTRPGMOD MODULE($(BIN_LIB)/LIVRELST) SRCSTMF('src/qrpglesrc/livrelst.rpgle') OPTION(*EVENTF) DBGVIEW(*SOURCE) TGTRLS(*CURRENT) TGTCCSID(*JOB)" > .logs/livrelst.splf || \
-	(system "CPYTOSTMF FROMMBR('$(PREPATH)/EVFEVENT.FILE/LIVRELST.MBR') TOSTMF('.evfevent/livrelst.evfevent') DBFCCSID(*FILE) STMFCCSID(1208) STMFOPT(*REPLACE)"; $(SHELL) -c 'exit 1')
-$(PREPATH)/LIVRERSTGET.MODULE: src/test/QRPGLESRC/LIVRERST_GETBYCODE.rpgle
-	liblist -c $(BIN_LIB);\
-	liblist -a $(LIBL);\
-	system "CRTRPGMOD MODULE($(BIN_LIB)/LIVRERSTGET) SRCSTMF('src/test/QRPGLESRC/LIVRERST_GETBYCODE.rpgle') OPTION(*EVENTF) DBGVIEW(*SOURCE) TGTRLS(*CURRENT) TGTCCSID(*JOB)" > .logs/livrerstget.splf || \
-	(system "CPYTOSTMF FROMMBR('$(PREPATH)/EVFEVENT.FILE/LIVRERSTGET.MBR') TOSTMF('.evfevent/livrerstget.evfevent') DBFCCSID(*FILE) STMFCCSID(1208) STMFOPT(*REPLACE)"; $(SHELL) -c 'exit 1')
-
-$(PREPATH)/LIVRERST.MODULE: src/qrpglesrc/livrerst.sqlrpgle
-	liblist -c $(BIN_LIB);\
-	liblist -a $(LIBL);\
-	system "CRTSQLRPGI OBJ($(BIN_LIB)/LIVRERST) SRCSTMF('src/qrpglesrc/livrerst.sqlrpgle') COMMIT(*NONE) DBGVIEW(*SOURCE) COMPILEOPT('TGTCCSID(*JOB)') RPGPPOPT(*LVL2) OPTION(*EVENTF) OBJTYPE(*MODULE)" > .logs/livrerst.splf || \
-	(system "CPYTOSTMF FROMMBR('$(PREPATH)/EVFEVENT.FILE/LIVRERST.MBR') TOSTMF('.evfevent/livrerst.evfevent') DBFCCSID(*FILE) STMFCCSID(1208) STMFOPT(*REPLACE)"; $(SHELL) -c 'exit 1')
-$(PREPATH)/L..MODULE: src/qtstsrc/livrerst.tst.sqlrpgle
-	liblist -c $(BIN_LIB);\
-	liblist -a $(LIBL);\
-	system "CRTSQLRPGI OBJ($(BIN_LIB)/L.) SRCSTMF('src/qtstsrc/livrerst.tst.sqlrpgle') COMMIT(*NONE) DBGVIEW(*SOURCE) COMPILEOPT('TGTCCSID(*JOB)') RPGPPOPT(*LVL2) OPTION(*EVENTF) OBJTYPE(*MODULE)" > .logs/l..splf || \
-	(system "CPYTOSTMF FROMMBR('$(PREPATH)/EVFEVENT.FILE/L..MBR') TOSTMF('.evfevent/l..evfevent') DBFCCSID(*FILE) STMFCCSID(1208) STMFOPT(*REPLACE)"; $(SHELL) -c 'exit 1')
-
-
-
-
-
-$(PREPATH)/TFR.FILE: src/sql/testbugFakeRest.sql
-	liblist -c $(BIN_LIB);\
-	liblist -a $(LIBL);\
-	system "RUNSQLSTM SRCSTMF('src/sql/testbugFakeRest.sql') COMMIT(*NONE)" > .logs/tfr.splf
-
-
-
-
-$(PREPATH)/LIVRERST.SRVPGM: src/qsrvsrc/livrerst.bnd
-	-system -q "CRTBNDDIR BNDDIR($(BIN_LIB)/$(APP_BNDDIR))"
-	liblist -c $(BIN_LIB);\
-	liblist -a $(LIBL);\
-	system "CRTSRVPGM SRVPGM($(BIN_LIB)/LIVRERST) MODULE(LIVRERST) SRCSTMF('src/qsrvsrc/livrerst.bnd') BNDDIR($(BNDDIR)) REPLACE(*YES)" > .logs/livrerst.splf
-	-system -q "ADDBNDDIRE BNDDIR($(BIN_LIB)/$(APP_BNDDIR)) OBJ((*LIBL/LIVRERST *SRVPGM *IMMED))"
-
-
-$(PREPATH)/%.BNDDIR: 
-	-system -q "CRTBNDDIR BNDDIR($(BIN_LIB)/$*)"
-	-system -q "ADDBNDDIRE BNDDIR($(BIN_LIB)/$*) OBJ($(patsubst %.SRVPGM,(*LIBL/% *SRVPGM *IMMED),$(notdir $^)))"
-
-
-
-
+	
+release:
+	@echo " -- Creating release. --"
+	@echo " -- Creating save file. --"
+	system "CRTSAVF FILE($(BIN_LIB)/RELEASE)"
+	system "SAVLIB LIB($(BIN_LIB)) DEV(*SAVF) SAVF($(BIN_LIB)/RELEASE) OMITOBJ((RELEASE *FILE))"
+	-rm -r release
+	-mkdir release
+	system "CPYTOSTMF FROMMBR('/QSYS.lib/$(BIN_LIB).lib/RELEASE.FILE') TOSTMF('./release/release.savf') STMFOPT(*REPLACE) STMFCCSID(1252) CVTDTA(*NONE)"
+	@echo " -- Cleaning up... --"
+	system "DLTOBJ OBJ($(BIN_LIB)/RELEASE) OBJTYPE(*FILE)"
+	@echo " -- Release created! --"
+	@echo ""
+	@echo "To install the release, run:"
+	@echo "  > CRTLIB $(BIN_LIB)"
+	@echo "  > CPYFRMSTMF FROMSTMF('./release/release.savf') TOMBR('/QSYS.lib/$(BIN_LIB).lib/RELEASE.FILE') MBROPT(*REPLACE) CVTDTA(*NONE)"
+	@echo "  > RSTLIB SAVLIB($(BIN_LIB)) DEV(*SAVF) SAVF($(BIN_LIB)/RELEASE)"
+	@echo ""
