@@ -1,9 +1,12 @@
 {
   "repository": "git@github.com:IBM/ibmi-company_system.git",
-  "description": "Tant qu'il y aura des bug !",
+  "description": "Tant qu'il y aura des bugs !",
   "includePath": [
     "./src/qrpgleref"
   ],
   "curlib": "&CURLIB",
-  "objlib": "&CURLIB"
+  "objlib": "&CURLIB",
+  "preUsrlibl": [
+    "novy4001"
+  ]
 }
