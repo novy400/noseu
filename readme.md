@@ -77,6 +77,79 @@ Nous allons suivre les étapes suivantes :
 - [iRPGUnit](https://irpgunit.sourceforge.io/)
 - [gmake GNU make](https://www.gnu.org/software/make/manual/make.html)
 
+## Instructions de configuration et d'exécution
+
+### Configuration
+
+1. Clonez le dépôt Git de l'application :
+
+```bash
+git clone https://github.com/novy400/yabug.git
+cd yabug
+```
+
+2. Installez les extensions recommandées pour Visual Studio Code. Lorsque vous ouvrez le projet dans VS Code, il vous sera demandé d'installer les extensions recommandées. Acceptez et installez-les.
+
+3. Configurez les variables d'environnement en créant un fichier `.env` à la racine du projet. Vous pouvez utiliser le fichier `.env.example` comme modèle :
+
+```bash
+cp .env.example .env
+```
+
+4. Modifiez le fichier `.env` pour définir les valeurs appropriées pour votre environnement.
+
+### Exécution
+
+1. Ouvrez le projet dans Visual Studio Code :
+
+```bash
+code .
+```
+
+2. Lancez la tâche de construction pour compiler les composants de l'application. Vous pouvez utiliser la commande suivante dans le terminal intégré de VS Code :
+
+```bash
+gmake
+```
+
+3. Déployez l'application sur votre IBM i en utilisant la commande suivante :
+
+```bash
+ici --cmd "mkdir -p './builds/ics_${GITHUB_HEAD_REF}'" --rcwd "./builds/ics_${GITHUB_HEAD_REF}" --push "." --cmd "/QOpenSys/pkgs/bin/gmake LIBL= ${{ secrets.DEV_LIBL }} BIN_LIB= ${{ secrets.USER_LIB }}"
+```
+
+4. Exécutez les tests automatisés pour vous assurer que l'application fonctionne correctement :
+
+```bash
+gmake tst
+```
+
+## Exemples d'utilisation
+
+### Lister tous les livres
+
+Pour lister tous les livres, exécutez le programme `LIVRELST` :
+
+```bash
+CALL PGM(LIVRELST)
+```
+
+### Afficher les détails d'un livre
+
+Pour afficher les détails d'un livre, exécutez le programme `LIVREDET` en fournissant le code du livre en paramètre :
+
+```bash
+CALL PGM(LIVREDET) PARM('1')
+```
+
+## Code de conduite
+
+Nous nous engageons à fournir un environnement de collaboration ouvert et accueillant pour tous les contributeurs. Veuillez consulter notre [Code de conduite](CODE_OF_CONDUCT.md) pour plus de détails.
+
+## Directives de contribution
+
+Nous apprécions les contributions de la communauté. Pour en savoir plus sur la façon de contribuer, veuillez consulter nos [Directives de contribution](CONTRIBUTING.md).
+
 ## TODO
 
 - [ ] ajouter une image avec le logo des routes de l'IBMi et CODE4i.

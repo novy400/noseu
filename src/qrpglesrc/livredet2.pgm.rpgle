@@ -7,12 +7,14 @@ Ctl-Opt Main(main)
 
 /include '../qrpgleref/livrerst.rpgleinc'
 
+// Main procedure to display book details
 Dcl-Proc main;
   Dcl-Pi *N;
     pCode char(4) const;
   End-Pi;
   dcl-ds lLivre likeds(LIVRERST_Detail);
   clear lLivre;
+  // Get book details by code
   if LIVRERST_GETBYCODE(%int(pCode):lLivre);
     snd-msg 'le code ' + %char(lLivre.code);
     snd-msg 'le titre ' + %trim(lLivre.titre);

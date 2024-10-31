@@ -5,6 +5,7 @@ ctl-opt nomain
         bnddir('QC2LE');
 /include '../qrpgleref/livrerst.rpgleinc'
 
+// Procedure to get all books
 dcl-proc LIVRERST_GETALL export;
   dcl-pi *n ind;
     pLivres likeds(LIVRERST_Item) dim(1000) options(*varsize);
@@ -76,6 +77,7 @@ dcl-proc LIVRERST_GETALL export;
   return *on;
 end-proc;
 
+// Procedure to get a book by its code
 dcl-proc LIVRERST_GETBYCODE export;
   dcl-pi *n ind;
     pCode like(LIVRERST_Detail.code) const;
@@ -148,7 +150,7 @@ dcl-proc LIVRERST_GETBYCODE export;
   endmon;
 end-proc;
 
-
+// Procedure to get the base URL for the API
 dcl-proc getUrl;
   dcl-pi *N;
     pUrl like(gLongueVariable);
@@ -161,6 +163,8 @@ dcl-proc getUrl;
   // finalisation
   return; 
 end-proc; 
+
+// Procedure to get the header for the API requests
 dcl-proc getHeader;
   dcl-pi *N;
     pHeader like(gLongueVariable);

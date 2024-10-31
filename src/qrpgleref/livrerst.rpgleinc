@@ -7,7 +7,11 @@
 // ------------------------------------------------------------------//
 // printf (c)                                                       //
 // ------------------------------------------------------------------//
+
+// Global variable to hold long strings
 dcl-s gLongueVariable varchar(256);
+
+// Data structure to hold detailed information about a book
 dcl-ds LIVRERST_Detail template qualified;
   code int(10);
   titre varchar(132);
@@ -15,17 +19,20 @@ dcl-ds LIVRERST_Detail template qualified;
   nombrePages int(10);
   urlPhoto varchar(132);
 end-ds;
+
+// Data structure to hold summary information about a book
 dcl-ds LIVRERST_Item template qualified;
   code like(LIVRERST_Detail.code);
   titre like(LIVRERST_Detail.titre);
 end-ds;
 
+// Procedure to get all books
 dcl-pr LIVRERST_GETALL ind extproc(*dclcase);
   livres likeds(LIVRERST_Item) dim(1000) options(*varsize);
 end-pr;
 
+// Procedure to get a book by its code
 dcl-pr LIVRERST_GETBYCODE ind extproc(*dclcase);
   code like(LIVRERST_Detail.code) const;
   livre  likeds(LIVRERST_Detail);
 end-pr;
-

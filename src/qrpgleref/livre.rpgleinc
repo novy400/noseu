@@ -8,22 +8,28 @@
 // ------------------------------------------------------------------//
 // printf (c)                                                       //
 // ------------------------------------------------------------------//
+
+// Data structure to hold detailed information about a book
 dcl-ds LIVRE_Detail template qualified;
   code like(LIVRERST_Detail.code);
   titre like(LIVRERST_Detail.titre);
   description like(LIVRERST_Detail.description);
   nombrePages like(LIVRERST_Detail.nombrePages);
-  urlPhoto like(LIVRERST_DetailurlPhoto);
+  urlPhoto like(LIVRERST_Detail.urlPhoto);
 end-ds;
+
+// Data structure to hold summary information about a book
 dcl-ds LIVRE_Item template qualified;
   code like(LIVRE_Detail.code);
   titre like(LIVRE_Detail.titre);
 end-ds;
 
+// Procedure to get all books
 dcl-pr LIVRE_GETALL ind extproc(*dclcase);
   livres likeds(LIVRE_Item) dim(1000) options(*varsize);
 end-pr;
 
+// Procedure to get a book by its code
 dcl-pr LIVRE_GETBYCODE ind extproc(*dclcase);
   id like(LIVRE_Detail.id) const;
   livre likeds(LIVRE_Detail);
